@@ -1,0 +1,543 @@
+openapi: 3.0.2
+info:
+    title: bci-crud-api-v1
+    version: '1.0'
+    description: Api Rest que genera las operaciones CRUD de usuarios
+paths:
+    /saveUser:
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UsersDTO'
+                required: true
+            parameters:
+                -
+                    name: Authorization
+                    description: >-
+                        Header para autorización: Se debe ingresar el token generado y éste debe comenzar con
+                        "Bearer "
+
+                        Ejemplo
+
+                        __________________
+
+                        Bearer
+                        eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjk0OTYxMDE5LCJpYXQiOjE2OTMxNjEwMTl9.vCnIZeQB6iMaD5KduTDEKNSs0goRY-YQ8mSJVBdWyUjDrx2dczsHA9uqx6pq8ODmKqsB37QYTE0Hxcxk_q_SsQ
+                    schema:
+                        type: string
+                    in: header
+                    required: true
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessUserResponseDTO'
+                    description: >-
+                        Success
+
+                        ==========
+
+                        Enviado cuando el usuario se persistió en la Base de Datos y la solicitud se completó
+                        exitosamente
+
+
+                        -----------------------------------------------------
+
+
+                        responseCode       | responseDescription
+
+                        -------------      |--------------------
+
+                        00000              | Exito
+                '401':
+                    description: El request no cumple con la autorización
+                '404':
+                    description: La URL no es válida o es incorrecta
+                '409':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponseDTO'
+                    description: |-
+                        Conflict
+                        ==========
+                        Existe algún usuario que posee el mismo registro y debe ser único
+
+                        -----------------------------------------------------
+
+                        responseCode       | responseDescription
+                        -------------      |--------------------
+                        00003              | No se encuentran registros
+                        00004              | El email ya se encuentra registrado para otro usuario
+                        00005              | El teléfono ya se encuentra registrado para otro usuario
+            summary: Save User
+            description: Guarda un usuario en la Base de Datos
+    /getAllUsers:
+        get:
+            parameters:
+                -
+                    name: Authorization
+                    description: >-
+                        Header para autorización: Se debe ingresar el token generado y éste debe comenzar con
+                        "Bearer "
+
+                        Ejemplo
+
+                        __________________
+
+                        Bearer
+                        eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjk0OTYxMDE5LCJpYXQiOjE2OTMxNjEwMTl9.vCnIZeQB6iMaD5KduTDEKNSs0goRY-YQ8mSJVBdWyUjDrx2dczsHA9uqx6pq8ODmKqsB37QYTE0Hxcxk_q_SsQ
+                    schema:
+                        type: string
+                    in: header
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessListUserResponseDTO'
+                    description: |-
+                        Success
+                        ==========
+                        Enviado cuando la solicitud se completó exitosamente
+
+                        -----------------------------------------------------
+
+                        responseCode       | responseDescription
+                        -------------      |--------------------
+                        00000              | Exito
+                '401':
+                    description: El request no cumple con la autorización
+                '404':
+                    description: La URL no es válida o es incorrecta
+                '409':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponseDTO'
+                    description: |-
+                        Conflict
+                        ==========
+                        No se encuentran registros en la Base de Datos
+
+                        -----------------------------------------------------
+
+                        responseCode       | responseDescription
+                        -------------      |--------------------
+                        00003              | No se encuentran registros
+            summary: Get All Users
+            description: Retorna todos los usuarios registrados
+    /updateUser:
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UsersDTO'
+                required: true
+            parameters:
+                -
+                    name: Authorization
+                    description: >-
+                        Header para autorización: Se debe ingresar el token generado y éste debe comenzar con
+                        "Bearer "
+
+                        Ejemplo
+
+                        __________________
+
+                        Bearer
+                        eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjk0OTYxMDE5LCJpYXQiOjE2OTMxNjEwMTl9.vCnIZeQB6iMaD5KduTDEKNSs0goRY-YQ8mSJVBdWyUjDrx2dczsHA9uqx6pq8ODmKqsB37QYTE0Hxcxk_q_SsQ
+                    schema:
+                        type: string
+                    in: header
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessUserResponseDTO'
+                    description: >-
+                        Success
+
+                        ==========
+
+                        Enviado cuando los nuevos datos del usuario se persistieron en la Base de Datos y la
+                        solicitud se completó exitosamente
+
+
+                        -----------------------------------------------------
+
+
+                        responseCode       | responseDescription
+
+                        -------------      |--------------------
+
+                        00000              | Exito
+                '401':
+                    description: El request no cumple con la autorización
+                '404':
+                    description: La URL no es válida o es incorrecta
+                '409':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponseDTO'
+                    description: |-
+                        Conflict
+                        ==========
+                        Existe algún usuario que posee el mismo registro y debe ser único
+
+                        -----------------------------------------------------
+
+                        responseCode       | responseDescription
+                        -------------      |--------------------
+                        00003              | No se encuentran registros
+                        00004              | El email ya se encuentra registrado para otro usuario
+                        00005              | El teléfono ya se encuentra registrado para otro usuario
+            summary: Update User
+            description: Actualiza un usuario en la Base de Datos
+    '/getUserByName/{name}':
+        get:
+            parameters:
+                -
+                    name: name
+                    schema:
+                        type: string
+                    in: path
+                    required: true
+                -
+                    name: Authorization
+                    description: >-
+                        Header para autorización: Se debe ingresar el token generado y éste debe comenzar con
+                        "Bearer "
+
+                        Ejemplo
+
+                        __________________
+
+                        Bearer
+                        eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjk0OTYxMDE5LCJpYXQiOjE2OTMxNjEwMTl9.vCnIZeQB6iMaD5KduTDEKNSs0goRY-YQ8mSJVBdWyUjDrx2dczsHA9uqx6pq8ODmKqsB37QYTE0Hxcxk_q_SsQ
+                    schema:
+                        type: string
+                    in: header
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessUserResponseDTO'
+                    description: |-
+                        Success
+                        ==========
+                        Enviado cuando la solicitud se completó exitosamente
+
+                        -----------------------------------------------------
+
+                        responseCode       | responseDescription
+                        -------------      |--------------------
+                        00000              | Exito
+                '401':
+                    description: El request no cumple con la autorización
+                '404':
+                    description: La URL no es válida o es incorrecta
+                '409':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponseDTO'
+                    description: |-
+                        Conflict
+                        ==========
+                        No se encuentran registros en la Base de Datos
+
+                        -----------------------------------------------------
+
+                        responseCode       | responseDescription
+                        -------------      |--------------------
+                        00003              | No se encuentran registros
+            summary: Get User By Name
+            description: Obtiene los datos del usuarios buscando por nombre
+        parameters:
+            -
+                name: name
+                in: path
+                required: true
+    '/deleteUserByName/{name}':
+        delete:
+            parameters:
+                -
+                    name: name
+                    schema:
+                        type: string
+                    in: path
+                    required: true
+                -
+                    name: Authorization
+                    description: >-
+                        Header para autorización: Se debe ingresar el token generado y éste debe comenzar con
+                        "Bearer "
+
+                        Ejemplo
+
+                        __________________
+
+                        Bearer
+                        eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjk0OTYxMDE5LCJpYXQiOjE2OTMxNjEwMTl9.vCnIZeQB6iMaD5KduTDEKNSs0goRY-YQ8mSJVBdWyUjDrx2dczsHA9uqx6pq8ODmKqsB37QYTE0Hxcxk_q_SsQ
+                    schema:
+                        type: string
+                    in: header
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GenericResponseDTO'
+                    description: |-
+                        Success
+                        ==========
+                        Enviado cuando la solicitud se completó exitosamente
+
+                        -----------------------------------------------------
+
+                        responseCode       | responseDescription
+                        -------------      |--------------------
+                        00000              | Exito
+                '401':
+                    description: El request no cumple con la autorización
+                '404':
+                    description: La URL no es válida o es incorrecta
+                '409':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponseDTO'
+                    description: |-
+                        Conflict
+                        ==========
+                        No se encuentran registros en la Base de Datos
+
+                        -----------------------------------------------------
+
+                        responseCode       | responseDescription
+                        -------------      |--------------------
+                        00003              | No se encuentran registros
+            summary: Delete User By Name
+            description: Busca un Usuario por nombre y luego lo elimina de la Base de Datos
+        parameters:
+            -
+                name: name
+                in: path
+                required: true
+components:
+    schemas:
+        PhoneDTO:
+            title: Root Type for PhoneDTO
+            description: ''
+            required:
+                - citycode
+                - number
+                - contrycode
+            type: object
+            properties:
+                number:
+                    pattern: '^(0|[1-9][0-9]*)$'
+                    type: string
+                citycode:
+                    maxLength: 10
+                    pattern: '^(0|[1-9][0-9]*)$'
+                    type: string
+                contrycode:
+                    pattern: '^\d{2}$'
+                    type: string
+            example:
+                number: '12345345'
+                citycode: '1'
+                contrycode: '57'
+        UsersDTO:
+            title: Root Type for UsersDTO
+            description: ''
+            required:
+                - phones
+                - name
+                - email
+                - password
+            type: object
+            properties:
+                name:
+                    type: string
+                email:
+                    maxLength: 100
+                    pattern: '[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}'
+                    type: string
+                password:
+                    type: string
+                phones:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/PhoneDTO'
+            example:
+                name: florencia
+                email: francisco@gmail.com
+                password: passfrancisco001
+                phones:
+                    -
+                        number: '12345345'
+                        citycode: '1'
+                        contrycode: '57'
+        ErrorResponseDTO:
+            title: Root Type for ErrorResponseDTO
+            description: ''
+            required:
+                - codigoRespuesta
+                - descripcionRespuesta
+                - mensaje
+            type: object
+            properties:
+                codigoRespuesta:
+                    type: string
+                descripcionRespuesta:
+                    type: string
+                mensaje:
+                    type: string
+            example:
+                codigoRespuesta: '00003'
+                descripcionRespuesta: No se encuentran registros
+                mensaje: No se encuentra el usuario
+        SuccessUserResponseDTO:
+            title: Root Type for SuccessUserResponseDTO
+            description: ''
+            required:
+                - userResponse
+                - descripcionRespuesta
+                - codigoRespuesta
+            type: object
+            properties:
+                codigoRespuesta:
+                    type: string
+                descripcionRespuesta:
+                    type: string
+                userResponse:
+                    $ref: '#/components/schemas/UserResponseDTO'
+                    properties:
+                        id:
+                            type: string
+                        name:
+                            type: string
+                        created:
+                            format: date-time
+                            type: string
+                        modified:
+                            format: date-time
+                            type: string
+                        lastLogin:
+                            format: date-time
+                            type: string
+                        token:
+                            type: string
+            example:
+                codigoRespuesta: '00000'
+                descripcionRespuesta: Exito
+                userResponse:
+                    id: 6e4be474-143f-420b-8f06-6d2c93911654
+                    name: florencia
+                    created: '2023-08-28T15:03:53.350+0000'
+                    modified: '2023-08-28T15:03:53.606+0000'
+                    lastLogin: '2023-08-28T15:03:53.350+0000'
+                    token: >-
+                        eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmbG9yZW5jaWEiLCJleHAiOjE2OTUwMzUwMzMsImlhdCI6MTY5MzIzNTAzM30.Z4LIZtAOESIAmWGdDX41fUU_l6SfCeX9czI1YnmelAMGK7wHxZeEwaAgGU6UaKaz41PYUVnYOe1XNdBOej2rIw
+        UserResponseDTO:
+            title: Root Type for UserResponseDTO
+            description: ''
+            required:
+                - created
+                - id
+                - lastLogin
+                - modified
+                - name
+                - token
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                created:
+                    format: date-time
+                    type: string
+                modified:
+                    format: date-time
+                    type: string
+                lastLogin:
+                    format: date-time
+                    type: string
+                token:
+                    type: string
+            example:
+                id: 6e4be474-143f-420b-8f06-6d2c93911654
+                name: florencia
+                created: '2023-08-28T15:03:53.350+0000'
+                modified: '2023-08-28T15:03:53.606+0000'
+                lastLogin: '2023-08-28T15:03:53.350+0000'
+                token: >-
+                    eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmbG9yZW5jaWEiLCJleHAiOjE2OTUwMzUwMzMsImlhdCI6MTY5MzIzNTAzM30.Z4LIZtAOESIAmWGdDX41fUU_l6SfCeX9czI1YnmelAMGK7wHxZeEwaAgGU6UaKaz41PYUVnYOe1XNdBOej2rIw
+        SuccessListUserResponseDTO:
+            title: Root Type for SuccessListUserResponseDTO
+            description: ''
+            required:
+                - codigoRespuesta
+                - descripcionRespuesta
+                - userResponseList
+            type: object
+            properties:
+                codigoRespuesta:
+                    type: string
+                descripcionRespuesta:
+                    type: string
+                userResponseList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/UserResponseDTO'
+            example:
+                codigoRespuesta: '00000'
+                descripcionRespuesta: Exito
+                userResponseList:
+                    -
+                        id: 6e4be474-143f-420b-8f06-6d2c93911654
+                        name: florencia
+                        created: '2023-08-28T15:03:53.350+0000'
+                        modified: '2023-08-28T15:03:53.606+0000'
+                        lastLogin: '2023-08-28T15:03:53.350+0000'
+                        token: >-
+                            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmbG9yZW5jaWEiLCJleHAiOjE2OTUwMzUwMzMsImlhdCI6MTY5MzIzNTAzM30.Z4LIZtAOESIAmWGdDX41fUU_l6SfCeX9czI1YnmelAMGK7wHxZeEwaAgGU6UaKaz41PYUVnYOe1XNdBOej2rIw
+                    -
+                        id: cf9fa6ca-cbaf-4a81-93a0-32b22fa5c160
+                        name: administrator
+                        created: '2023-08-26T19:57:59.000+0000'
+                        modified: '2023-08-26T19:57:59.000+0000'
+                        lastLogin: '2023-08-28T15:06:14.195+0000'
+                        token: >-
+                            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjk0OTYxMDE5LCJpYXQiOjE2OTMxNjEwMTl9.vCnIZeQB6iMaD5KduTDEKNSs0goRY-YQ8mSJVBdWyUjDrx2dczsHA9uqx6pq8ODmKqsB37QYTE0Hxcxk_q_SsQ
+        GenericResponseDTO:
+            title: Root Type for GenericResponseDTO
+            description: ''
+            required:
+                - codigoRespuesta
+                - descripcionRespuesta
+            type: object
+            properties:
+                codigoRespuesta:
+                    type: string
+                descripcionRespuesta:
+                    type: string
+            example:
+                codigoRespuesta: '00000'
+                descripcionRespuesta: Success
+
