@@ -15,16 +15,19 @@
         
 
 ## Endpoints
-- Todos los endpoints retornan información en un JSON
-- Los endpoints POST y PUT sólo aceptan peticiones JSON
+En el siguiente link se puede ver en detalle la especificación de la API: https://studio-ws.apicur.io/sharing/b1063fbc-30db-4760-8d67-dbcf70974e01
+Todos los endpoints retornan información en un JSON. Los endpoints POST y PUT sólo aceptan peticiones JSON
 
-GET endpoint: http://localhost:8080/getUserByName/admin
-GET endpoint: http://localhost:8080/getAllUsers
-DELETE endpoint: http://localhost:8080/deleteUserByName/francisco
-POST endpoint: http://localhost:8080/saveUser
-PUT endpoint: http://localhost:8080/updateUser
+- GET endpoint: http://localhost:8080/getUserByName/admin
+- GET endpoint: http://localhost:8080/getAllUsers
+- DELETE endpoint: http://localhost:8080/deleteUserByName/francisco
+- POST endpoint: http://localhost:8080/saveUser
+- PUT endpoint: http://localhost:8080/updateUser
 
-![Colección para Postman: ](bci-crud-users-v1.postman_collection.json)
+![Descargar Colección para Postman ](bci-crud-users-v1.postman_collection.json)
+
+![Descargar archivo Swagger ](bci-crud-api-v1.yaml)
+
 
 
 
