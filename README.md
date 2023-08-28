@@ -1,5 +1,5 @@
 # bci-crud-users-v1
+- Al iniciar el servicio se ejecutan los archivos ## schema.sql y data.sql
+- El archivo
 
-- Autenticación con JWT. Ya existe un usuario registrado que puede ejecutar todas las operaciones, las credenciales son las siguientes
 
-![Diagrama de servicios Get](Get Services.drawio.png)
