@@ -53,4 +53,4 @@ Todos los endpoints retornan información en un JSON. Los endpoints POST y PUT s
 ![Diagrama endpoints: Save, Update, Delete](save-update-delete.drawio.png)
 
 - Diagrama endpoints: GetUserByName and  GetAllUsers
-![Diagrama endpoints: GetUserByName and  GetAllUsers](save-update-delete.drawio.png)
+![Diagrama endpoints: GetUserByName and  GetAllUsers](get-services.drawio.png)
